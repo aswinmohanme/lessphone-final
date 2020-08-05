@@ -3,6 +3,7 @@ import 'package:intent/extra.dart';
 import 'package:intent/flag.dart';
 import 'package:intent/intent.dart' as Intent;
 import 'package:intent/action.dart' as IntentAction;
+import 'package:device_apps/device_apps.dart';
 
 class PlatformIntents {
   static launchBatteryIntent() {
@@ -63,5 +64,9 @@ class PlatformIntents {
       ..setData(Uri(scheme: 'mailto', path: 'dev.aswinmohan@gmail.com'))
       ..putExtra(Extra.EXTRA_SUBJECT, "LessPhone Rocks!")
       ..startActivity().catchError((e) => print(e));
+  }
+
+  static launchApp(String packageName) {
+    DeviceApps.openApp(packageName);
   }
 }

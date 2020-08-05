@@ -5,11 +5,13 @@ import '../utils/platform_intents.dart';
 import '../widgets/body_text.dart';
 import '../widgets/text_clock.dart';
 import '../widgets/battery_indicator.dart';
+import '../models/custom_app.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(kScreenPadding),
@@ -23,6 +25,26 @@ class HomeScreen extends StatelessWidget {
                   TextClock(),
                   BatteryIndicator(),
                 ],
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: CustomAppRepo.count(),
+                itemBuilder: (BuildContext context, int index) {
+                  CustomApp customApp = CustomAppRepo.get(index);
+                  return Container(
+                    padding: EdgeInsets.symmetric(vertical: s_4),
+                    child: GestureDetector(
+                      onTap: () {
+                        if (customApp.isTaskApp)
+                          print("Task");
+                        else
+                          PlatformIntents.launchApp(customApp.packageName);
+                      },
+                      child: Text(customApp.name,
+                          style: Theme.of(context).textTheme.headline6),
+                    ),
+                  );
+                },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
