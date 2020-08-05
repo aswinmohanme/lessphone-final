@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../styles.dart';
 import '../widgets/body_text.dart';
 import '../widgets/text_clock.dart';
+import '../widgets/battery_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextClock(),
-                  BodyText("88%"),
+                  BatteryIndicator(),
                 ],
               ),
               Row(
