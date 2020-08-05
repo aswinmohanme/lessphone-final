@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import './screens/home_screen.dart';
+import 'themes.dart';
+
 void main() {
   runApp(Lessphone());
 }
@@ -8,11 +11,8 @@ class Lessphone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Column(
-          children: <Widget>[Text("Hello")],
-        ),
-      ),
+      theme: buildLessphoneLightTheme(),
+      home: HomeScreen(),
     );
   }
 }

@@ -33,3 +33,7 @@ const double text_3xl = 1.875 * rem;
 const double text_4xl = 2.25 * rem;
 const double text_5xl = 3 * rem;
 const double text_6 = 4 * rem;
+
+// Default Padding
+const kDefaultPadding = s_4;
+const kScreenPadding = s_6;
