@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../styles.dart';
 import '../utils/platform_intents.dart';
-import '../widgets/body_text.dart';
+import '../widgets/footer.dart';
 import '../widgets/text_clock.dart';
 import '../widgets/battery_indicator.dart';
 import '../models/custom_app.dart';
@@ -53,18 +53,12 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      PlatformIntents.launchDailerIntent();
-                    },
-                    child: BodyText("dialer"),
-                  ),
-                  BodyText("settings"),
-                ],
+              Footer(
+                leftText: "dialer",
+                leftFunction: () {
+                  PlatformIntents.launchDailerIntent();
+                },
+                rightText: "settings",
               ),
             ],
           ),

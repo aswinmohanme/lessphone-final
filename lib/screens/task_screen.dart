@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/heading_text.dart';
-import '../widgets/body_text.dart';
+import '../widgets/footer.dart';
 import '../styles.dart';
 import '../models/task.dart';
 
@@ -20,7 +20,7 @@ class TaskScreen extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: s_4),
               HeadingText("Tasks"),
-              SizedBox(height: s_8),
+              SizedBox(height: s_12),
               TextField(
                 onSubmitted: (String name) {
                   TaskRepo.createTask(name);
@@ -58,27 +58,15 @@ class TaskScreen extends StatelessWidget {
                   },
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: s_2),
-                      child: BodyText("back"),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      TaskRepo.clearCompleted();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: s_2),
-                      child: BodyText("clear completed"),
-                    ),
-                  ),
-                ],
+              Footer(
+                leftText: "back",
+                leftFunction: () {
+                  Navigator.of(context).pop();
+                },
+                rightText: "clear completed",
+                rightFunction: () {
+                  TaskRepo.clearCompleted();
+                },
               ),
             ],
           ),
