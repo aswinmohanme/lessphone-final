@@ -6,6 +6,7 @@ import '../widgets/body_text.dart';
 import '../widgets/text_clock.dart';
 import '../widgets/battery_indicator.dart';
 import '../models/custom_app.dart';
+import 'task_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -17,7 +18,6 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.all(kScreenPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,6 +26,7 @@ class HomeScreen extends StatelessWidget {
                   BatteryIndicator(),
                 ],
               ),
+              Spacer(),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: CustomAppRepo.count(),
@@ -36,7 +37,12 @@ class HomeScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         if (customApp.isTaskApp)
-                          print("Task");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => TaskScreen(),
+                            ),
+                          );
                         else
                           PlatformIntents.launchApp(customApp.packageName);
                       },
@@ -46,6 +52,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
+              Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
