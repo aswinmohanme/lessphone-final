@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../styles.dart';
+import '../utils/platform_intents.dart';
 import '../widgets/body_text.dart';
 import '../widgets/text_clock.dart';
 import '../widgets/battery_indicator.dart';
@@ -27,7 +28,12 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  BodyText("dialer"),
+                  GestureDetector(
+                    onTap: () {
+                      PlatformIntents.launchDailerIntent();
+                    },
+                    child: BodyText("dialer"),
+                  ),
                   BodyText("settings"),
                 ],
               ),
