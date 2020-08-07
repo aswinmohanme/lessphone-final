@@ -38,7 +38,7 @@ class TaskScreen extends StatelessWidget {
               Expanded(
                 child: ValueListenableBuilder(
                     valueListenable: Task.listenable(),
-                    builder: (context, _, _) {
+                    builder: (context, box, _) {
                       return ListView.builder(
                         itemCount: Task.count(),
                         itemBuilder: (BuildContext context, int index) {
