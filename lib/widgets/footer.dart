@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'body_text.dart';
+import 'text.dart';
 import '../styles.dart';
 
 class Footer extends StatelessWidget {

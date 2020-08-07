@@ -7,9 +7,7 @@ class Task {
   setCompleted(bool value) {
     this.isCompleted = value;
   }
-}
 
-class TaskRepo {
   static var _initialList = [
     Task(name: "Create a task"),
     Task(name: "Do that Task"),

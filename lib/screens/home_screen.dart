@@ -7,6 +7,7 @@ import '../widgets/text_clock.dart';
 import '../widgets/battery_indicator.dart';
 import '../models/custom_app.dart';
 import 'task_screen.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -29,9 +30,9 @@ class HomeScreen extends StatelessWidget {
               Spacer(),
               ListView.builder(
                 shrinkWrap: true,
-                itemCount: CustomAppRepo.count(),
+                itemCount: CustomApp.count(),
                 itemBuilder: (BuildContext context, int index) {
-                  CustomApp customApp = CustomAppRepo.get(index);
+                  CustomApp customApp = CustomApp.get(index);
                   return Container(
                     padding: EdgeInsets.symmetric(vertical: s_4),
                     child: GestureDetector(
@@ -59,6 +60,14 @@ class HomeScreen extends StatelessWidget {
                   PlatformIntents.launchDailerIntent();
                 },
                 rightText: "settings",
+                rightFunction: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => SettingsScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

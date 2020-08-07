@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
 
 import '../utils/platform_intents.dart';
-import 'body_text.dart';
+import 'text.dart';
 
 class TextClock extends StatefulWidget {
   @override

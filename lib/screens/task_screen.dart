@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/heading_text.dart';
+import '../widgets/text.dart';
 import '../widgets/footer.dart';
 import '../styles.dart';
 import '../models/task.dart';
@@ -22,8 +22,9 @@ class TaskScreen extends StatelessWidget {
               HeadingText("Tasks"),
               SizedBox(height: s_12),
               TextField(
+                controller: _textFieldController,
                 onSubmitted: (String name) {
-                  TaskRepo.createTask(name);
+                  Task.createTask(name);
                   _textFieldController.clear();
                 },
                 decoration: InputDecoration(
@@ -36,9 +37,9 @@ class TaskScreen extends StatelessWidget {
               SizedBox(height: s_4),
               Expanded(
                 child: ListView.builder(
-                  itemCount: TaskRepo.count(),
+                  itemCount: Task.count(),
                   itemBuilder: (BuildContext context, int index) {
-                    Task task = TaskRepo.get(index);
+                    Task task = Task.get(index);
                     return Container(
                       padding: EdgeInsets.symmetric(vertical: s_2),
                       child: ListTileTheme(
@@ -65,7 +66,7 @@ class TaskScreen extends StatelessWidget {
                 },
                 rightText: "clear completed",
                 rightFunction: () {
-                  TaskRepo.clearCompleted();
+                  Task.clearCompleted();
                 },
               ),
             ],

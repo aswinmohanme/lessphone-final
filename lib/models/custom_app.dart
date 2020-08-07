@@ -9,9 +9,7 @@ class CustomApp {
   bool get isTaskApp {
     return this.packageName == TASK_APP_PACKAGE_NAME;
   }
-}
 
-class CustomAppRepo {
   static var _initialList = [
     CustomApp(name: "Tasks", packageName: TASK_APP_PACKAGE_NAME),
     CustomApp(name: "Whatsapp", packageName: "com.whatsapp"),

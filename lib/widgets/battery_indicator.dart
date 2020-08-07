@@ -2,7 +2,7 @@ import 'package:battery/battery.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/platform_intents.dart';
-import 'body_text.dart';
+import 'text.dart';
 
 class BatteryIndicator extends StatefulWidget {
   @override
