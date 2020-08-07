@@ -33,7 +33,7 @@ ColorScheme lessphoneLightColorScheme = ColorScheme.light().copyWith(
   primary: Colors.black,
   primaryVariant: TWUIColors.gray.shade500,
   secondary: Colors.black,
-  secondaryVariant: TWUIColors.gray.shade200,
+  secondaryVariant: TWUIColors.gray.shade100,
   onPrimary: Colors.white,
   onSecondary: Colors.white,
   background: Colors.white,

@@ -20,39 +20,46 @@ class SettingsScreen extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: s_4),
               HeadingText("Settings"),
-              SizedBox(height: s_12),
-              SettingBigBodyText("Change Theme"),
-              SizedBox(height: s_1),
-              SegmentedChoice(choices: ["light", "black", "yellow", "blue"]),
-              SizedBox(height: s_4),
-              SettingBigBodyText("Number of Custom Apps"),
-              SizedBox(height: s_1),
-              SegmentedChoice(choices: ["2", "3", "4", "5", "6", "7", "8"]),
-              SizedBox(height: s_4),
-              SettingBigBodyText("Font Size"),
-              SizedBox(height: s_1),
-              SegmentedChoice(choices: ["small", "medium", "large"]),
-              SizedBox(height: s_12),
-              ListView.builder(
+              ListView(
                 shrinkWrap: true,
-                itemCount: CustomApp.count(),
-                itemBuilder: (BuildContext context, int index) {
-                  CustomApp customApp = CustomApp.get(index);
-                  return Container(
-                      padding: EdgeInsets.symmetric(vertical: s_3),
-                      child: SettingBigBodyText(customApp.name));
-                },
+                children: <Widget>[
+                  SizedBox(height: s_12),
+                  SettingBigBodyText("Change Theme"),
+                  SizedBox(height: s_1),
+                  SegmentedChoice(
+                      choices: ["light", "black", "yellow", "blue"]),
+                  SizedBox(height: s_4),
+                  SettingBigBodyText("Number of Custom Apps"),
+                  SizedBox(height: s_1),
+                  SegmentedChoice(choices: ["2", "3", "4", "5", "6", "7", "8"]),
+                  SizedBox(height: s_4),
+                  SettingBigBodyText("Font Size"),
+                  SizedBox(height: s_1),
+                  SegmentedChoice(choices: ["small", "medium", "large"]),
+                  SizedBox(height: s_12),
+                  CaptionText("custom apps"),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: CustomApp.count(),
+                    itemBuilder: (BuildContext context, int index) {
+                      CustomApp customApp = CustomApp.get(index);
+                      return Container(
+                          padding: EdgeInsets.symmetric(vertical: s_3),
+                          child: SettingBigBodyText(customApp.name));
+                    },
+                  ),
+                  SizedBox(height: s_12),
+                  SettingBigBodyText("Launcher Settings",
+                      onTap: PlatformIntents.launchHomeSettings),
+                  SizedBox(height: s_4),
+                  SettingBigBodyText("Settings",
+                      onTap: PlatformIntents.launchDeviceSettings),
+                  SizedBox(height: s_12),
+                  CaptionText("for every star you take away a bunny dies"),
+                  SettingBigBodyText("Rate us on the Play Store",
+                      onTap: PlatformIntents.launchPlayStorePage),
+                ],
               ),
-              SizedBox(height: s_12),
-              SettingBigBodyText("Launcher Settings",
-                  onTap: PlatformIntents.launchHomeSettings),
-              SizedBox(height: s_4),
-              SettingBigBodyText("Settings",
-                  onTap: PlatformIntents.launchDeviceSettings),
-              SizedBox(height: s_12),
-              CaptionText("for every star you take away a bunny dies"),
-              SettingBigBodyText("Rate us on the Play Store",
-                  onTap: PlatformIntents.launchPlayStorePage),
               Spacer(),
               Footer(
                 leftText: "back",
@@ -90,7 +97,6 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
   Widget build(BuildContext context) {
     return CupertinoSlidingSegmentedControl(
       backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
-      padding: EdgeInsets.symmetric(horizontal: s_4, vertical: s_1),
       thumbColor: Theme.of(context).colorScheme.background,
       groupValue: groupValue,
       onValueChanged: (value) {
@@ -114,7 +120,7 @@ class SettingBigBodyText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: BigBodyText(text),
+      child: BodyText(text),
     );
   }
 }
