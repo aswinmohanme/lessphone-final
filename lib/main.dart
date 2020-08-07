@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import './screens/home_screen.dart';
 import 'themes.dart';
+import 'utils/hive_repo.dart';
 
-void main() {
+void main() async {
+  await HiveRepo.initHive();
   runApp(Lessphone());
 }
 

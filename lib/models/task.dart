@@ -1,5 +1,14 @@
-class Task {
+import 'package:hive/hive.dart';
+
+part 'task.g.dart';
+
+import '../utils/hive_repo.dart';
+
+@HiveType(typeId: TASK_BOX_TYPE_ID)
+class Task extends HiveObject {
+  @HiveField(0)
   final String name;
+  @HiveField(1)
   bool isCompleted;
 
   Task({this.name, this.isCompleted = false});
