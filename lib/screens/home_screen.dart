@@ -28,31 +28,37 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: CustomApp.count(),
-                itemBuilder: (BuildContext context, int index) {
-                  CustomApp customApp = CustomApp.get(index);
-                  return Container(
-                    padding: EdgeInsets.symmetric(vertical: s_4),
-                    child: GestureDetector(
-                      onTap: () {
-                        if (customApp.isTaskApp)
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => TaskScreen(),
-                            ),
-                          );
-                        else
-                          PlatformIntents.launchApp(customApp.packageName);
+              ValueListenableBuilder(
+                  valueListenable: CustomApp.listenable(),
+                  builder: (context, box, _) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: CustomApp.count(),
+                      itemBuilder: (BuildContext context, int index) {
+                        CustomApp customApp = CustomApp.get(index);
+                        return Container(
+                          padding: EdgeInsets.symmetric(vertical: s_4),
+                          child: GestureDetector(
+                            onTap: () {
+                              if (customApp.isTaskApp)
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        TaskScreen(),
+                                  ),
+                                );
+                              else
+                                PlatformIntents.launchApp(
+                                    customApp.packageName);
+                            },
+                            child: Text(customApp.name,
+                                style: Theme.of(context).textTheme.headline6),
+                          ),
+                        );
                       },
-                      child: Text(customApp.name,
-                          style: Theme.of(context).textTheme.headline6),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  }),
               Spacer(),
               Footer(
                 leftText: "dialer",

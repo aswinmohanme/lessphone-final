@@ -38,11 +38,11 @@ class TaskScreen extends StatelessWidget {
               Expanded(
                 child: ValueListenableBuilder(
                     valueListenable: Task.listenable(),
-                    builder: (context, box, _) {
+                    builder: (context, _, _) {
                       return ListView.builder(
-                        itemCount: box.length,
+                        itemCount: Task.count(),
                         itemBuilder: (BuildContext context, int index) {
-                          Task task = box.getAt(index);
+                          Task task = Task.get(index);
                           return Container(
                             padding: EdgeInsets.symmetric(vertical: s_2),
                             child: ListTileTheme(

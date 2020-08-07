@@ -1,7 +1,17 @@
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import '../utils/hive_repo.dart';
+
+part 'custom_app.g.dart';
+
 const TASK_APP_PACKAGE_NAME = "me.aswinmohan.lessphone.tasks";
 
+@HiveType(typeId: CUSTOM_APP_BOX_TYPE_ID)
 class CustomApp {
+  @HiveField(0)
   final String name;
+  @HiveField(1)
   final String packageName;
 
   CustomApp({this.name, this.packageName = ""});
@@ -10,21 +20,21 @@ class CustomApp {
     return this.packageName == TASK_APP_PACKAGE_NAME;
   }
 
-  static var _initialList = [
-    CustomApp(name: "Tasks", packageName: TASK_APP_PACKAGE_NAME),
-    CustomApp(name: "Whatsapp", packageName: "com.whatsapp"),
-    CustomApp(name: "Select Custom App"),
-  ];
+  static var _objectBox = Hive.box(TASK_BOX);
 
-  static all() {
-    return _initialList;
-  }
-
-  static get(int index) {
-    return _initialList.elementAt(index);
+  static listenable() {
+    return _objectBox.listenable();
   }
 
   static count() {
-    return _initialList.length;
+    return _objectBox.length;
+  }
+
+  static get(int index) {
+    return _objectBox.getAt(index);
+  }
+
+  static addCustomApp() {
+    _objectBox.add(CustomApp(name: "test", packageName: "test"));
   }
 }

@@ -28,6 +28,10 @@ class Task extends HiveObject {
     _objectBox.add(Task(name: name));
   }
 
+  static get(int index) {
+    return _objectBox.getAt(index);
+  }
+
   static clearCompleted() {
     var completedTasksKeys = [];
     _objectBox.keys.toList().forEach((key) {
