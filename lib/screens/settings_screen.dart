@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../styles.dart';
 import '../utils/platform_intents.dart';
@@ -20,56 +21,17 @@ class SettingsScreen extends StatelessWidget {
               SizedBox(height: s_4),
               HeadingText("Settings"),
               SizedBox(height: s_12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SettingBigBodyText("Change Theme"),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: s_1, horizontal: s_4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
-                      borderRadius: BorderRadius.circular(s_4),
-                    ),
-                    child: ButtonText("light"),
-                  ),
-                ],
-              ),
+              SettingBigBodyText("Change Theme"),
+              SizedBox(height: s_1),
+              SegmentedChoice(choices: ["light", "black", "yellow", "blue"]),
               SizedBox(height: s_4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SettingBigBodyText("Number of Custom Apps"),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: s_1, horizontal: s_4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
-                      borderRadius: BorderRadius.circular(s_4),
-                    ),
-                    child: ButtonText("4"),
-                  ),
-                ],
-              ),
+              SettingBigBodyText("Number of Custom Apps"),
+              SizedBox(height: s_1),
+              SegmentedChoice(choices: ["2", "3", "4", "5", "6", "7", "8"]),
               SizedBox(height: s_4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SettingBigBodyText("Font Size"),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: s_1, horizontal: s_4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
-                      borderRadius: BorderRadius.circular(s_4),
-                    ),
-                    child: ButtonText("medium"),
-                  ),
-                ],
-              ),
+              SettingBigBodyText("Font Size"),
+              SizedBox(height: s_1),
+              SegmentedChoice(choices: ["small", "medium", "large"]),
               SizedBox(height: s_12),
               ListView.builder(
                 shrinkWrap: true,
@@ -106,6 +68,38 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SegmentedChoice extends StatefulWidget {
+  final List<String> choices;
+  const SegmentedChoice({
+    Key key,
+    this.choices,
+  }) : super(key: key);
+
+  @override
+  _SegmentedChoiceState createState() => _SegmentedChoiceState();
+}
+
+class _SegmentedChoiceState extends State<SegmentedChoice> {
+  int groupValue = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoSlidingSegmentedControl(
+      backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+      padding: EdgeInsets.symmetric(horizontal: s_4, vertical: s_1),
+      thumbColor: Theme.of(context).colorScheme.background,
+      groupValue: groupValue,
+      onValueChanged: (value) {
+        setState(() {
+          groupValue = value;
+        });
+      },
+      children:
+          widget.choices.map((choice) => ButtonText(choice)).toList().asMap(),
     );
   }
 }

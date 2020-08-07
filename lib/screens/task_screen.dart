@@ -45,7 +45,7 @@ class TaskScreen extends StatelessWidget {
                       child: ListTileTheme(
                         contentPadding: EdgeInsets.all(0),
                         child: CheckboxListTile(
-                          dense: false,
+                          dense: true,
                           value: task.isCompleted,
                           title: Text(task.name,
                               style: Theme.of(context).textTheme.bodyText1),
