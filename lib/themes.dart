@@ -41,11 +41,12 @@ ColorScheme lessphoneLightColorScheme = ColorScheme.light().copyWith(
   background: Colors.white,
   onBackground: Colors.black,
 );
+
 ColorScheme lessphoneDarkColorScheme = ColorScheme.dark().copyWith(
   primary: Colors.white,
-  primaryVariant: Colors.white,
+  primaryVariant: TWUIColors.gray.shade300,
   secondary: Colors.white,
-  secondaryVariant: Colors.white,
+  secondaryVariant: TWUIColors.gray.shade500,
   onPrimary: Colors.black,
   onSecondary: Colors.black,
   background: Colors.black,
@@ -54,11 +55,12 @@ ColorScheme lessphoneDarkColorScheme = ColorScheme.dark().copyWith(
 
 ThemeData buildLessphoneLightTheme() {
   return ThemeData.from(
-      textTheme: lessphoneTextTheme.apply(
-        bodyColor: lessphoneLightColorScheme.primary,
-        displayColor: lessphoneLightColorScheme.primary,
-      ),
-      colorScheme: lessphoneLightColorScheme);
+    textTheme: lessphoneTextTheme.apply(
+      bodyColor: lessphoneLightColorScheme.primary,
+      displayColor: lessphoneLightColorScheme.primary,
+    ),
+    colorScheme: lessphoneLightColorScheme,
+  );
 }
 
 ThemeData buildLessphoneBlackTheme() {

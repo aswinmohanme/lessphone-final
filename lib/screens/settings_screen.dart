@@ -154,7 +154,7 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
   @override
   Widget build(BuildContext context) {
     return CupertinoSlidingSegmentedControl(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
       thumbColor: Theme.of(context).colorScheme.background,
       groupValue: groupValue,
       onValueChanged: (value) {
