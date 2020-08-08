@@ -19,6 +19,13 @@ class Lessphone extends StatelessWidget {
           return MaterialApp(
             theme: buildLessphoneTheme(SettingsBox.currentTheme),
             home: HomeScreen(),
+            builder: (context, child) {
+              return MediaQuery(
+                data: MediaQuery.of(context)
+                    .copyWith(textScaleFactor: SettingsBox.currentFontFactor),
+                child: child,
+              );
+            },
           );
         });
   }

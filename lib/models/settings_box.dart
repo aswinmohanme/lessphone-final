@@ -19,6 +19,14 @@ class SettingsBox {
     _objectBox.put('currentTheme', themeToSegmentValue(theme));
   }
 
+  static get currentFontFactor {
+    return _objectBox.get('currentFontFactor', defaultValue: 1.0);
+  }
+
+  static set currentFontFactor(double factor) {
+    _objectBox.put('currentFontFactor', factor);
+  }
+
   static LESSPHONE_THEMES segmentValueToTheme(value) {
     switch (value) {
       case 0:

@@ -62,7 +62,12 @@ class SettingsScreen extends StatelessWidget {
                     SizedBox(height: s_4),
                     SettingBigBodyText("Font Size"),
                     SizedBox(height: s_1),
-                    //SegmentedChoice(choices: ["small", "medium", "large"]),
+                    SegmentedChoice(
+                        choices: {0.8: "small", 1.0: "medium", 1.2: "large"},
+                        defaultValue: SettingsBox.currentFontFactor,
+                        afterValueChanged: (factor) {
+                          SettingsBox.currentFontFactor = factor;
+                        }),
                     SizedBox(height: s_10),
                     CaptionText("custom apps"),
                     ValueListenableBuilder(
