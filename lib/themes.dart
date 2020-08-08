@@ -41,7 +41,16 @@ ColorScheme lessphoneLightColorScheme = ColorScheme.light().copyWith(
   background: Colors.white,
   onBackground: Colors.black,
 );
-ColorScheme lessphoneDarkColorScheme = ColorScheme.dark().copyWith();
+ColorScheme lessphoneDarkColorScheme = ColorScheme.dark().copyWith(
+  primary: Colors.white,
+  primaryVariant: Colors.white,
+  secondary: Colors.white,
+  secondaryVariant: Colors.white,
+  onPrimary: Colors.black,
+  onSecondary: Colors.black,
+  background: Colors.black,
+  onBackground: Colors.white,
+);
 
 ThemeData buildLessphoneLightTheme() {
   return ThemeData.from(
@@ -50,4 +59,24 @@ ThemeData buildLessphoneLightTheme() {
         displayColor: lessphoneLightColorScheme.primary,
       ),
       colorScheme: lessphoneLightColorScheme);
+}
+
+ThemeData buildLessphoneBlackTheme() {
+  return ThemeData.from(
+      textTheme: lessphoneTextTheme.apply(
+        bodyColor: lessphoneDarkColorScheme.primary,
+        displayColor: lessphoneDarkColorScheme.primary,
+      ),
+      colorScheme: lessphoneDarkColorScheme);
+}
+
+ThemeData buildLessphoneTheme(LESSPHONE_THEMES theme) {
+  switch (theme) {
+    case LESSPHONE_THEMES.light:
+      return buildLessphoneLightTheme();
+    case LESSPHONE_THEMES.black:
+      return buildLessphoneBlackTheme();
+    default:
+      return buildLessphoneLightTheme();
+  }
 }

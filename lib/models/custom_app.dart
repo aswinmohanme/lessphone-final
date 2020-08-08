@@ -47,7 +47,7 @@ class CustomApp {
     } else if (_objectBox.length > numberOfApps) {
       int numberOfAppsToDelete = _objectBox.length - numberOfApps;
       for (int i = numberOfAppsToDelete; i > 0; --i) {
-        _objectBox.deleteAt(i - 1);
+        _objectBox.deleteAt(numberOfApps + i - 1);
       }
     }
   }
