@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './screens/home_screen.dart';
 import 'themes.dart';
 import 'utils/hive_repo.dart';
+import './models/settings_box.dart';
 
 void main() async {
   await HiveRepo.initHive();
@@ -12,9 +13,13 @@ void main() async {
 class Lessphone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: buildLessphoneLightTheme(),
-      home: HomeScreen(),
-    );
+    return ValueListenableBuilder(
+        valueListenable: SettingsBox.listenable,
+        builder: (context, box, _) {
+          return MaterialApp(
+            theme: buildLessphoneTheme(SettingsBox.currentTheme),
+            home: HomeScreen(),
+          );
+        });
   }
 }
