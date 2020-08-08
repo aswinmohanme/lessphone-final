@@ -27,17 +27,31 @@ class SettingsScreen extends StatelessWidget {
                     SizedBox(height: s_8),
                     SettingBigBodyText("Change Theme"),
                     SizedBox(height: s_1),
-                    SegmentedChoice(
-                        choices: ["light", "black", "yellow", "blue"]),
+                    //SegmentedChoice(
+                    //   choices: ["light", "black", "yellow", "blue"]),
                     SizedBox(height: s_4),
                     SettingBigBodyText("Number of Custom Apps"),
                     SizedBox(height: s_1),
                     SegmentedChoice(
-                        choices: ["2", "3", "4", "5", "6", "7", "8"]),
+                      choices: {
+                        1: "1",
+                        2: "2",
+                        3: "3",
+                        4: "4",
+                        5: "5",
+                        6: "6",
+                        7: "7",
+                        8: "8"
+                      },
+                      defaultValue: CustomApp.count(),
+                      afterValueChanged: (value) {
+                        CustomApp.setNumberOfApps(value);
+                      },
+                    ),
                     SizedBox(height: s_4),
                     SettingBigBodyText("Font Size"),
                     SizedBox(height: s_1),
-                    SegmentedChoice(choices: ["small", "medium", "large"]),
+                    //SegmentedChoice(choices: ["small", "medium", "large"]),
                     SizedBox(height: s_10),
                     CaptionText("custom apps"),
                     ListView.builder(
@@ -85,10 +99,15 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class SegmentedChoice extends StatefulWidget {
-  final List<String> choices;
+  final Map<dynamic, dynamic> choices;
+  final Function afterValueChanged;
+  final int defaultValue;
+
   const SegmentedChoice({
     Key key,
     this.choices,
+    this.afterValueChanged,
+    this.defaultValue,
   }) : super(key: key);
 
   @override
@@ -96,7 +115,13 @@ class SegmentedChoice extends StatefulWidget {
 }
 
 class _SegmentedChoiceState extends State<SegmentedChoice> {
-  int groupValue = 0;
+  int groupValue;
+
+  @override
+  void initState() {
+    groupValue = widget.defaultValue ?? 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +133,10 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
         setState(() {
           groupValue = value;
         });
+        widget.afterValueChanged(value);
       },
-      children:
-          widget.choices.map((choice) => ButtonText(choice)).toList().asMap(),
+      children: Map.fromIterable(widget.choices.entries,
+          key: (entry) => entry.key, value: (entry) => Text(entry.value)),
     );
   }
 }

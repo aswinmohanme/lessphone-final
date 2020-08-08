@@ -37,4 +37,18 @@ class CustomApp {
   static addCustomApp() {
     _objectBox.add(CustomApp(name: "test", packageName: "test"));
   }
+
+  static setNumberOfApps(int numberOfApps) {
+    if (_objectBox.length < numberOfApps) {
+      int numberOfAppsToAdd = numberOfApps - _objectBox.length;
+      for (int i = 0; i <= numberOfAppsToAdd; ++i) {
+        _objectBox.add(CustomApp(name: "Select Custom App"));
+      }
+    } else {
+      int numberOfAppsToDelete = _objectBox.length - numberOfApps;
+      for (int i = numberOfAppsToDelete + 1; i > 0; --i) {
+        _objectBox.deleteAt(i - 1);
+      }
+    }
+  }
 }
