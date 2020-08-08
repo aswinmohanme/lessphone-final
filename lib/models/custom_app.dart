@@ -57,8 +57,10 @@ class CustomApp {
   }
 
   static initCustomApps() {
-    _objectBox.addAll([
+    _objectBox.add(
       CustomApp(name: "Tasks", packageName: TASK_APP_PACKAGE_NAME),
+    );
+    _objectBox.addAll([
       CustomApp(name: "Select Custom App"),
       CustomApp(name: "Select Custom App"),
       CustomApp(name: "Select Custom App"),

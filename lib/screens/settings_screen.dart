@@ -66,17 +66,22 @@ class SettingsScreen extends StatelessWidget {
                       //SegmentedChoice(choices: ["small", "medium", "large"]),
                       SizedBox(height: s_10),
                       CaptionText("custom apps"),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: CustomApp.count(),
-                        itemBuilder: (BuildContext context, int index) {
-                          CustomApp customApp = CustomApp.get(index);
-                          return Container(
-                              padding: EdgeInsets.symmetric(vertical: s_3),
-                              child: SettingBigBodyText(customApp.name));
-                        },
-                      ),
+                      ValueListenableBuilder(
+                          valueListenable: CustomApp.listenable(),
+                          builder: (context, box, _) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: CustomApp.count(),
+                              itemBuilder: (BuildContext context, int index) {
+                                CustomApp customApp = CustomApp.get(index);
+                                return Container(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: s_3),
+                                    child: SettingBigBodyText(customApp.name));
+                              },
+                            );
+                          }),
                       SizedBox(height: s_10),
                       SettingBigBodyText("Launcher Settings",
                           onTap: PlatformIntents.launchHomeSettings),
