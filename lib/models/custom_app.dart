@@ -41,12 +41,12 @@ class CustomApp {
   static setNumberOfApps(int numberOfApps) {
     if (_objectBox.length < numberOfApps) {
       int numberOfAppsToAdd = numberOfApps - _objectBox.length;
-      for (int i = 0; i <= numberOfAppsToAdd; ++i) {
+      for (int i = 0; i < numberOfAppsToAdd; ++i) {
         _objectBox.add(CustomApp(name: "Select Custom App"));
       }
-    } else {
+    } else if (_objectBox.length > numberOfApps) {
       int numberOfAppsToDelete = _objectBox.length - numberOfApps;
-      for (int i = numberOfAppsToDelete + 1; i > 0; --i) {
+      for (int i = numberOfAppsToDelete; i > 0; --i) {
         _objectBox.deleteAt(i - 1);
       }
     }
