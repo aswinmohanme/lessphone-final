@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './screens/home_screen.dart';
 import 'themes.dart';
 import 'utils/hive_repo.dart';
+import 'utils/no_scroll_glow.dart';
 import './models/settings_box.dart';
 
 void main() async {
@@ -23,7 +24,10 @@ class Lessphone extends StatelessWidget {
               return MediaQuery(
                 data: MediaQuery.of(context)
                     .copyWith(textScaleFactor: SettingsBox.currentFontFactor),
-                child: child,
+                child: ScrollConfiguration(
+                  child: child,
+                  behavior: NoScrollGlow(),
+                ),
               );
             },
           );
