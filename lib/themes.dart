@@ -29,6 +29,8 @@ TextTheme lessphoneTextTheme = TextTheme(
       fontSize: 11, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
 
+enum LESSPHONE_THEMES { light, black, yellow, blue, wall }
+
 ColorScheme lessphoneLightColorScheme = ColorScheme.light().copyWith(
   primary: Colors.black,
   primaryVariant: TWUIColors.gray.shade500,
