@@ -48,11 +48,20 @@ class TaskScreen extends StatelessWidget {
                             child: ListTileTheme(
                               contentPadding: EdgeInsets.all(0),
                               child: CheckboxListTile(
+                                checkColor:
+                                    Theme.of(context).colorScheme.background,
+                                activeColor:
+                                    Theme.of(context).colorScheme.primary,
                                 dense: true,
                                 value: task.isCompleted,
                                 title: Text(task.name,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(
+                                            decoration: task.isCompleted
+                                                ? TextDecoration.lineThrough
+                                                : TextDecoration.none)),
                                 controlAffinity:
                                     ListTileControlAffinity.leading,
                                 onChanged: (bool value) {

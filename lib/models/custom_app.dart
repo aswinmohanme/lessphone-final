@@ -20,7 +20,7 @@ class CustomApp {
     return this.packageName == TASK_APP_PACKAGE_NAME;
   }
 
-  static var _objectBox = Hive.box(TASK_BOX);
+  static var _objectBox = Hive.box(CUSTOM_APP_BOX);
 
   static listenable() {
     return _objectBox.listenable();
