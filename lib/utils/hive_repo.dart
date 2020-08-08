@@ -19,5 +19,9 @@ class HiveRepo {
 
     await Hive.openBox(TASK_BOX);
     await Hive.openBox(CUSTOM_APP_BOX);
+
+    if (CustomApp.isEmpty) {
+      CustomApp.initCustomApps();
+    }
   }
 }

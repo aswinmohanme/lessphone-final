@@ -51,4 +51,17 @@ class CustomApp {
       }
     }
   }
+
+  static get isEmpty {
+    return _objectBox.isEmpty;
+  }
+
+  static initCustomApps() {
+    _objectBox.addAll([
+      CustomApp(name: "Tasks", packageName: TASK_APP_PACKAGE_NAME),
+      CustomApp(name: "Select Custom App"),
+      CustomApp(name: "Select Custom App"),
+      CustomApp(name: "Select Custom App"),
+    ]);
+  }
 }
