@@ -6,12 +6,12 @@ import '../utils/platform_intents.dart';
 import '../widgets/footer.dart';
 import '../widgets/text.dart';
 import '../models/custom_app.dart';
+import '../models/settings_box.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(kScreenPadding),
@@ -20,47 +20,86 @@ class SettingsScreen extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: s_4),
               HeadingText("Settings"),
-              ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  SizedBox(height: s_12),
-                  SettingBigBodyText("Change Theme"),
-                  SizedBox(height: s_1),
-                  SegmentedChoice(
-                      choices: ["light", "black", "yellow", "blue"]),
-                  SizedBox(height: s_4),
-                  SettingBigBodyText("Number of Custom Apps"),
-                  SizedBox(height: s_1),
-                  SegmentedChoice(choices: ["2", "3", "4", "5", "6", "7", "8"]),
-                  SizedBox(height: s_4),
-                  SettingBigBodyText("Font Size"),
-                  SizedBox(height: s_1),
-                  SegmentedChoice(choices: ["small", "medium", "large"]),
-                  SizedBox(height: s_12),
-                  CaptionText("custom apps"),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: CustomApp.count(),
-                    itemBuilder: (BuildContext context, int index) {
-                      CustomApp customApp = CustomApp.get(index);
-                      return Container(
-                          padding: EdgeInsets.symmetric(vertical: s_3),
-                          child: SettingBigBodyText(customApp.name));
-                    },
-                  ),
-                  SizedBox(height: s_12),
-                  SettingBigBodyText("Launcher Settings",
-                      onTap: PlatformIntents.launchHomeSettings),
-                  SizedBox(height: s_4),
-                  SettingBigBodyText("Settings",
-                      onTap: PlatformIntents.launchDeviceSettings),
-                  SizedBox(height: s_12),
-                  CaptionText("for every star you take away a bunny dies"),
-                  SettingBigBodyText("Rate us on the Play Store",
-                      onTap: PlatformIntents.launchPlayStorePage),
-                ],
+              SizedBox(height: s_2),
+              Expanded(
+                child: ListView(
+                  children: <Widget>[
+                    SizedBox(height: s_8),
+                    SettingBigBodyText("Change Theme"),
+                    SizedBox(height: s_1),
+                    SegmentedChoice(
+                        choices: {
+                          0: "light",
+                          1: "black",
+                          2: "yellow",
+                          3: "blue",
+                          4: "wall",
+                        },
+                        defaultValue: SettingsBox.themeToSegmentValue(
+                            SettingsBox.currentTheme),
+                        afterValueChanged: (value) {
+                          SettingsBox.currentTheme =
+                              SettingsBox.segmentValueToTheme(value);
+                        }),
+                    SizedBox(height: s_4),
+                    SettingBigBodyText("Number of Custom Apps"),
+                    SizedBox(height: s_1),
+                    SegmentedChoice(
+                      choices: {
+                        2: "2",
+                        3: "3",
+                        4: "4",
+                        5: "5",
+                        6: "6",
+                        7: "7",
+                        8: "8"
+                      },
+                      defaultValue: CustomApp.count(),
+                      afterValueChanged: (value) {
+                        CustomApp.setNumberOfApps(value);
+                      },
+                    ),
+                    SizedBox(height: s_4),
+                    SettingBigBodyText("Font Size"),
+                    SizedBox(height: s_1),
+                    SegmentedChoice(
+                        choices: {0.8: "small", 1.0: "medium", 1.2: "large"},
+                        defaultValue: SettingsBox.currentFontFactor,
+                        afterValueChanged: (factor) {
+                          SettingsBox.currentFontFactor = factor;
+                        }),
+                    SizedBox(height: s_10),
+                    CaptionText("custom apps"),
+                    ValueListenableBuilder(
+                        valueListenable: CustomApp.listenable(),
+                        builder: (context, box, _) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: CustomApp.count(),
+                            itemBuilder: (BuildContext context, int index) {
+                              CustomApp customApp = CustomApp.get(index);
+                              return Container(
+                                  padding: EdgeInsets.symmetric(vertical: s_3),
+                                  child: SettingBigBodyText(customApp.name));
+                            },
+                          );
+                        }),
+                    SizedBox(height: s_10),
+                    SettingBigBodyText("Launcher Settings",
+                        onTap: PlatformIntents.launchHomeSettings),
+                    SizedBox(height: s_4),
+                    SettingBigBodyText("Settings",
+                        onTap: PlatformIntents.launchDeviceSettings),
+                    SizedBox(height: s_10),
+                    CaptionText("for every star you take away a bunny dies"),
+                    SettingBigBodyText("Rate us on the Play Store",
+                        onTap: PlatformIntents.launchPlayStorePage),
+                    SizedBox(height: s_4),
+                  ],
+                ),
               ),
-              Spacer(),
+              SizedBox(height: s_2),
               Footer(
                 leftText: "back",
                 leftFunction: () {
@@ -80,10 +119,15 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class SegmentedChoice extends StatefulWidget {
-  final List<String> choices;
+  final Map<dynamic, dynamic> choices;
+  final Function afterValueChanged;
+  final defaultValue;
+
   const SegmentedChoice({
     Key key,
     this.choices,
+    this.afterValueChanged,
+    this.defaultValue,
   }) : super(key: key);
 
   @override
@@ -91,7 +135,13 @@ class SegmentedChoice extends StatefulWidget {
 }
 
 class _SegmentedChoiceState extends State<SegmentedChoice> {
-  int groupValue = 0;
+  var groupValue;
+
+  @override
+  void initState() {
+    groupValue = widget.defaultValue ?? 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +153,10 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
         setState(() {
           groupValue = value;
         });
+        widget.afterValueChanged(value);
       },
-      children:
-          widget.choices.map((choice) => ButtonText(choice)).toList().asMap(),
+      children: Map.fromIterable(widget.choices.entries,
+          key: (entry) => entry.key, value: (entry) => ButtonText(entry.value)),
     );
   }
 }

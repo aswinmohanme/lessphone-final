@@ -29,6 +29,8 @@ TextTheme lessphoneTextTheme = TextTheme(
       fontSize: 11, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
 
+enum LESSPHONE_THEMES { light, black, yellow, blue, wall }
+
 ColorScheme lessphoneLightColorScheme = ColorScheme.light().copyWith(
   primary: Colors.black,
   primaryVariant: TWUIColors.gray.shade500,
@@ -39,13 +41,88 @@ ColorScheme lessphoneLightColorScheme = ColorScheme.light().copyWith(
   background: Colors.white,
   onBackground: Colors.black,
 );
-ColorScheme lessphoneDarkColorScheme = ColorScheme.dark().copyWith();
+
+ColorScheme lessphoneDarkColorScheme = ColorScheme.dark().copyWith(
+  primary: Colors.white,
+  primaryVariant: TWUIColors.gray.shade400,
+  secondary: Colors.white,
+  secondaryVariant: TWUIColors.gray.shade500,
+  onPrimary: Colors.black,
+  onSecondary: Colors.black,
+  background: Colors.black,
+  onBackground: Colors.white,
+);
+
+ColorScheme lessphoneYellowColorScheme = ColorScheme.light().copyWith(
+  primary: Colors.black,
+  primaryVariant: TWUIColors.gray.shade700,
+  secondary: Colors.black,
+  secondaryVariant: TWUIColors.yellow.shade400,
+  onPrimary: Colors.black,
+  onSecondary: Colors.black,
+  background: TWUIColors.yellow.shade300,
+  onBackground: Colors.black,
+);
+
+ColorScheme lessphoneBlueColorScheme = ColorScheme.dark().copyWith(
+  primary: Colors.white,
+  primaryVariant: TWUIColors.gray.shade200,
+  secondary: Colors.white,
+  secondaryVariant: TWUIColors.blue.shade400,
+  onPrimary: Colors.white,
+  onSecondary: Colors.white,
+  background: TWUIColors.blue.shade500,
+  onBackground: Colors.black,
+);
 
 ThemeData buildLessphoneLightTheme() {
   return ThemeData.from(
+    textTheme: lessphoneTextTheme.apply(
+      bodyColor: lessphoneLightColorScheme.primary,
+      displayColor: lessphoneLightColorScheme.primary,
+    ),
+    colorScheme: lessphoneLightColorScheme,
+  );
+}
+
+ThemeData buildLessphoneBlackTheme() {
+  return ThemeData.from(
       textTheme: lessphoneTextTheme.apply(
-        bodyColor: lessphoneLightColorScheme.primary,
-        displayColor: lessphoneLightColorScheme.primary,
+        bodyColor: lessphoneDarkColorScheme.primary,
+        displayColor: lessphoneDarkColorScheme.primary,
       ),
-      colorScheme: lessphoneLightColorScheme);
+      colorScheme: lessphoneDarkColorScheme);
+}
+
+ThemeData buildLessphoneYellowTheme() {
+  return ThemeData.from(
+      textTheme: lessphoneTextTheme.apply(
+        bodyColor: lessphoneYellowColorScheme.primary,
+        displayColor: lessphoneYellowColorScheme.primary,
+      ),
+      colorScheme: lessphoneYellowColorScheme);
+}
+
+ThemeData buildLessphoneBlueTheme() {
+  return ThemeData.from(
+      textTheme: lessphoneTextTheme.apply(
+        bodyColor: lessphoneBlueColorScheme.primary,
+        displayColor: lessphoneBlueColorScheme.primary,
+      ),
+      colorScheme: lessphoneBlueColorScheme);
+}
+
+ThemeData buildLessphoneTheme(LESSPHONE_THEMES theme) {
+  switch (theme) {
+    case LESSPHONE_THEMES.light:
+      return buildLessphoneLightTheme();
+    case LESSPHONE_THEMES.black:
+      return buildLessphoneBlackTheme();
+    case LESSPHONE_THEMES.yellow:
+      return buildLessphoneYellowTheme();
+    case LESSPHONE_THEMES.blue:
+      return buildLessphoneBlueTheme();
+    default:
+      return buildLessphoneLightTheme();
+  }
 }

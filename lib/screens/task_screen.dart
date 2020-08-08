@@ -36,28 +36,43 @@ class TaskScreen extends StatelessWidget {
               ),
               SizedBox(height: s_4),
               Expanded(
-                child: ListView.builder(
-                  itemCount: Task.count(),
-                  itemBuilder: (BuildContext context, int index) {
-                    Task task = Task.get(index);
-                    return Container(
-                      padding: EdgeInsets.symmetric(vertical: s_2),
-                      child: ListTileTheme(
-                        contentPadding: EdgeInsets.all(0),
-                        child: CheckboxListTile(
-                          dense: true,
-                          value: task.isCompleted,
-                          title: Text(task.name,
-                              style: Theme.of(context).textTheme.bodyText1),
-                          controlAffinity: ListTileControlAffinity.leading,
-                          onChanged: (bool value) {
-                            task.setCompleted(value);
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                child: ValueListenableBuilder(
+                    valueListenable: Task.listenable(),
+                    builder: (context, box, _) {
+                      return ListView.builder(
+                        itemCount: Task.count(),
+                        itemBuilder: (BuildContext context, int index) {
+                          Task task = Task.get(index);
+                          return Container(
+                            padding: EdgeInsets.symmetric(vertical: s_2),
+                            child: ListTileTheme(
+                              contentPadding: EdgeInsets.all(0),
+                              child: CheckboxListTile(
+                                checkColor:
+                                    Theme.of(context).colorScheme.background,
+                                activeColor:
+                                    Theme.of(context).colorScheme.primary,
+                                dense: true,
+                                value: task.isCompleted,
+                                title: Text(task.name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(
+                                            decoration: task.isCompleted
+                                                ? TextDecoration.lineThrough
+                                                : TextDecoration.none)),
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                onChanged: (bool value) {
+                                  task.setCompleted(value);
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }),
               ),
               Footer(
                 leftText: "back",
