@@ -79,7 +79,7 @@ class SettingsScreen extends StatelessWidget {
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: CustomApp.count(),
                             itemBuilder: (BuildContext context, int index) {
-                              CustomApp customApp = CustomApp.get(index);
+                              CustomApp customApp = CustomApp.getAt(index);
                               return Container(
                                   padding: EdgeInsets.symmetric(vertical: s_3),
                                   child: GestureDetector(

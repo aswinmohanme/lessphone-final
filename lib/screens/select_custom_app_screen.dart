@@ -28,7 +28,12 @@ class _SelectCustomAppScreenState extends State<SelectCustomAppScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: s_4),
-              HeadingText(widget.customApp.name),
+              ValueListenableBuilder(
+                  valueListenable: CustomApp.listenable(),
+                  builder: (context, box, _) {
+                    return HeadingText(
+                        CustomApp.get(widget.customApp.key).name);
+                  }),
               SizedBox(height: s_8),
               Expanded(
                 child: FutureBuilder(
@@ -80,6 +85,16 @@ class _SelectCustomAppScreenState extends State<SelectCustomAppScreen> {
                     }
                   },
                 ),
+              ),
+              Footer(
+                leftText: "back",
+                leftFunction: () {
+                  Navigator.of(context).pop();
+                },
+                rightText: "reset custom app",
+                rightFunction: () {
+                  widget.customApp.resetApp();
+                },
               ),
             ],
           ),

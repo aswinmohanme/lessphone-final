@@ -30,7 +30,11 @@ class CustomApp extends HiveObject {
     return _objectBox.length;
   }
 
-  static get(int index) {
+  static get(var key) {
+    return _objectBox.get(key);
+  }
+
+  static getAt(int index) {
     return _objectBox.getAt(index);
   }
 
@@ -42,6 +46,17 @@ class CustomApp extends HiveObject {
 
   get isSelectCustomApp {
     return this.packageName == "";
+  }
+
+  resetApp() {
+    if (this.key == 0) {
+      this.name = "Tasks";
+      this.packageName = TASK_APP_PACKAGE_NAME;
+    } else {
+      this.name = "Select Custom App";
+      this.packageName = "";
+    }
+    this.save();
   }
 
   static addCustomApp() {
