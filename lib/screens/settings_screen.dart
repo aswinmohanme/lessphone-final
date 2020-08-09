@@ -7,6 +7,7 @@ import '../widgets/footer.dart';
 import '../widgets/text.dart';
 import '../models/custom_app.dart';
 import '../models/settings_box.dart';
+import 'select_custom_app_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -81,7 +82,18 @@ class SettingsScreen extends StatelessWidget {
                               CustomApp customApp = CustomApp.get(index);
                               return Container(
                                   padding: EdgeInsets.symmetric(vertical: s_3),
-                                  child: SettingBigBodyText(customApp.name));
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                SelectCustomAppScreen(
+                                                    customApp: customApp),
+                                          ),
+                                        );
+                                      },
+                                      child:
+                                          SettingBigBodyText(customApp.name)));
                             },
                           );
                         }),
