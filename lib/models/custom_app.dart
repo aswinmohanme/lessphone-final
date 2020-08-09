@@ -40,6 +40,10 @@ class CustomApp extends HiveObject {
     this.save();
   }
 
+  get isSelectCustomApp {
+    return this.packageName == "";
+  }
+
   static addCustomApp() {
     _objectBox.add(CustomApp(name: "test", packageName: "test"));
   }

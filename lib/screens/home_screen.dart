@@ -8,6 +8,7 @@ import '../widgets/battery_indicator.dart';
 import '../models/custom_app.dart';
 import 'task_screen.dart';
 import 'settings_screen.dart';
+import 'select_custom_app_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -48,7 +49,16 @@ class HomeScreen extends StatelessWidget {
                                         TaskScreen(),
                                   ),
                                 );
-                              else
+                              else if (customApp.isSelectCustomApp) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        SelectCustomAppScreen(
+                                            customApp: customApp),
+                                  ),
+                                );
+                              } else
                                 PlatformIntents.launchApp(
                                     customApp.packageName);
                             },
