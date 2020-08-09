@@ -34,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
                           1: "black",
                           2: "yellow",
                           3: "blue",
-                          4: "wall",
+                          // 4: "wall",
                         },
                         defaultValue: SettingsBox.themeToSegmentValue(
                             SettingsBox.currentTheme),
