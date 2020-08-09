@@ -8,11 +8,11 @@ part 'custom_app.g.dart';
 const TASK_APP_PACKAGE_NAME = "me.aswinmohan.lessphone.tasks";
 
 @HiveType(typeId: CUSTOM_APP_BOX_TYPE_ID)
-class CustomApp {
+class CustomApp extends HiveObject {
   @HiveField(0)
-  final String name;
+  String name;
   @HiveField(1)
-  final String packageName;
+  String packageName;
 
   CustomApp({this.name, this.packageName = ""});
 
@@ -32,6 +32,12 @@ class CustomApp {
 
   static get(int index) {
     return _objectBox.getAt(index);
+  }
+
+  setCustomApp(String appName, String packageName) {
+    this.name = appName;
+    this.packageName = packageName;
+    this.save();
   }
 
   static addCustomApp() {

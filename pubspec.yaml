@@ -33,7 +33,7 @@ dependencies:
   google_fonts: ^1.1.0
   tailwind_colors: ^0.1.0
   battery: ^1.0.1
-  device_apps: ^1.1.1+1
+  device_apps: ^1.2.0
   hive: ^1.4.2
   hive_flutter: ^0.3.1
 
