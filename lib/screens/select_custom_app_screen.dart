@@ -86,6 +86,7 @@ class _SelectCustomAppScreenState extends State<SelectCustomAppScreen> {
                   },
                 ),
               ),
+              SizedBox(height: s_4),
               Footer(
                 leftText: "back",
                 leftFunction: () {
