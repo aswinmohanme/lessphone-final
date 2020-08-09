@@ -25,5 +25,8 @@ class HiveRepo {
     if (CustomApp.isEmpty) {
       CustomApp.initCustomApps();
     }
+    if (Task.isEmpty) {
+      Task.initTasks();
+    }
   }
 }

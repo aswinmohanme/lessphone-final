@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: CustomApp.count(),
                       itemBuilder: (BuildContext context, int index) {
-                        CustomApp customApp = CustomApp.get(index);
+                        CustomApp customApp = CustomApp.getAt(index);
                         return Container(
                           padding: EdgeInsets.symmetric(vertical: s_4),
                           child: GestureDetector(

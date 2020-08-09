@@ -28,8 +28,16 @@ class Task extends HiveObject {
     _objectBox.add(Task(name: name));
   }
 
-  static get(int index) {
+  static getAll() {
+    return _objectBox.values.toList();
+  }
+
+  static getAt(int index) {
     return _objectBox.getAt(index);
+  }
+
+  static getReversedAt(int index) {
+    return _objectBox.getAt(_objectBox.length - (index + 1));
   }
 
   static clearCompleted() {
@@ -44,5 +52,18 @@ class Task extends HiveObject {
   setCompleted(bool value) {
     this.isCompleted = value;
     this.save();
+  }
+
+  static get isEmpty {
+    print("Called");
+    return _objectBox.isEmpty;
+  }
+
+  static initTasks() {
+    _objectBox.addAll([
+      Task(name: "Cross that Task off, Repeat", isCompleted: true),
+      Task(name: "Do that Task"),
+      Task(name: "Record your Task"),
+    ]);
   }
 }

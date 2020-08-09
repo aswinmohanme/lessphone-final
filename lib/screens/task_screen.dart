@@ -40,9 +40,10 @@ class TaskScreen extends StatelessWidget {
                     valueListenable: Task.listenable(),
                     builder: (context, box, _) {
                       return ListView.builder(
+                        shrinkWrap: true,
                         itemCount: Task.count(),
                         itemBuilder: (BuildContext context, int index) {
-                          Task task = Task.get(index);
+                          Task task = Task.getReversedAt(index);
                           return Container(
                             padding: EdgeInsets.symmetric(vertical: s_2),
                             child: ListTileTheme(
