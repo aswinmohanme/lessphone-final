@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 import '../styles.dart';
 import '../utils/platform_intents.dart';
@@ -121,8 +122,13 @@ class SettingsScreen extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 rightText: "feedback",
-                rightFunction: () {
-                  PlatformIntents.sendEmailToDeveloper();
+                rightFunction: () async {
+                  final Email email = Email(
+                    body: 'Hey Lessphone,',
+                    subject: 'Lessphone Rocks!!',
+                    recipients: ['dev.aswinmohan@gmail.com'],
+                  );
+                  await FlutterEmailSender.send(email);
                 },
               ),
             ],
