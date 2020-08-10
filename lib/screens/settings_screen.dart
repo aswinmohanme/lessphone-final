@@ -187,7 +187,7 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
   }
 
   Future<void> _getProducts() async {
-    Set<String> ids = Set.from(['android.test.purchased']);
+    Set<String> ids = Set.from(['prod.nophone.dark']);
     ProductDetailsResponse response = await _iap.queryProductDetails(ids);
 
     setState(() {
