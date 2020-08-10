@@ -25,7 +25,7 @@ class Task extends HiveObject {
   }
 
   static createTask(String name) {
-    _objectBox.add(Task(name: name));
+    if (name.isNotEmpty) _objectBox.add(Task(name: name));
   }
 
   static getAll() {
