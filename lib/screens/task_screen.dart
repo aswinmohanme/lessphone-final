@@ -28,9 +28,17 @@ class TaskScreen extends StatelessWidget {
                   _textFieldController.clear();
                 },
                 decoration: InputDecoration(
-                  labelText: "Enter the task",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(s_2)),
+                  labelText: 'Enter the Todo',
+                  labelStyle: Theme.of(context).textTheme.bodyText1,
+                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary)),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      Task.createTask(_textFieldController.text);
+                    },
+                    icon: Icon(Icons.flight_takeoff),
                   ),
                 ),
               ),

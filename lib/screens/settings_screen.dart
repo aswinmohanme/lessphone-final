@@ -1,5 +1,8 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../styles.dart';
 import '../utils/platform_intents.dart';
@@ -149,10 +152,71 @@ class SegmentedChoice extends StatefulWidget {
 class _SegmentedChoiceState extends State<SegmentedChoice> {
   var groupValue;
 
+  bool _available = true;
+  InAppPurchaseConnection _iap = InAppPurchaseConnection.instance;
+  List<ProductDetails> _products = [];
+  List<PurchaseDetails> _purchases = [];
+  StreamSubscription _subscription;
+
   @override
   void initState() {
     groupValue = widget.defaultValue ?? 0;
+    _initialize();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+
+  void _initialize() async {
+    _available = await _iap.isAvailable();
+
+    if (_available) {
+      await _getProducts();
+      await _getPastPurchases();
+    }
+    _subscription = _iap.purchaseUpdatedStream.listen(
+      (data) => setState(() {
+        print('NEW PURCHASE');
+        _purchases.addAll(data);
+      }),
+    );
+  }
+
+  Future<void> _getProducts() async {
+    Set<String> ids = Set.from(['prod.nophone.dark']);
+    ProductDetailsResponse response = await _iap.queryProductDetails(ids);
+
+    setState(() {
+      _products = response.productDetails;
+    });
+  }
+
+  Future<void> _getPastPurchases() async {
+    QueryPurchaseDetailsResponse response = await _iap.queryPastPurchases();
+
+    for (PurchaseDetails purchase in response.pastPurchases) {
+      if (Platform.isIOS) {
+        InAppPurchaseConnection.instance.completePurchase(purchase);
+      }
+    }
+
+    setState(() {
+      _purchases = response.pastPurchases;
+    });
+  }
+
+  PurchaseDetails _hasPurchased(String productID) {
+    return _purchases.firstWhere((purchase) => purchase.productID == productID,
+        orElse: () => null);
+  }
+
+  void _buyProduct(ProductDetails prod) {
+    final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
+    _iap.buyNonConsumable(purchaseParam: purchaseParam);
   }
 
   @override
@@ -162,10 +226,14 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
       thumbColor: Theme.of(context).colorScheme.background,
       groupValue: groupValue,
       onValueChanged: (value) {
-        setState(() {
-          groupValue = value;
-        });
-        widget.afterValueChanged(value);
+        if (_hasPurchased(_products.first.id) != null) {
+          setState(() {
+            groupValue = value;
+          });
+          widget.afterValueChanged(value);
+        } else {
+          _buyProduct(_products.first);
+        }
       },
       children: Map.fromIterable(widget.choices.entries,
           key: (entry) => entry.key, value: (entry) => ButtonText(entry.value)),

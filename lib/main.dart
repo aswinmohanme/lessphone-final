@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import './screens/home_screen.dart';
 import 'themes.dart';
@@ -8,6 +9,7 @@ import './models/settings_box.dart';
 
 void main() async {
   await HiveRepo.initHive();
+  InAppPurchaseConnection.enablePendingPurchases();
   runApp(Lessphone());
 }
 
