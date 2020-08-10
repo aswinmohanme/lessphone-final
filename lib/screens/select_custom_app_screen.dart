@@ -75,7 +75,7 @@ class _SelectCustomAppScreenState extends State<SelectCustomAppScreen> {
                                   vertical: s_3,
                                   horizontal:
                                       selectedIndex == index ? s_2 : s_0),
-                              child: BigBodyText(installedApp.appName),
+                              child: BodyText(installedApp.appName),
                             ),
                           );
                         },

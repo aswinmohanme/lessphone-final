@@ -55,7 +55,6 @@ class Task extends HiveObject {
   }
 
   static get isEmpty {
-    print("Called");
     return _objectBox.isEmpty;
   }
 
