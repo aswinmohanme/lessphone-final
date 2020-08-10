@@ -17,22 +17,23 @@ class Lessphone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: SettingsBox.listenable,
-        builder: (context, box, _) {
-          return MaterialApp(
-            theme: buildLessphoneTheme(SettingsBox.currentTheme),
-            home: HomeScreen(),
-            builder: (context, child) {
-              return MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaleFactor: SettingsBox.currentFontFactor),
-                child: ScrollConfiguration(
-                  child: child,
-                  behavior: NoScrollGlow(),
-                ),
-              );
-            },
-          );
-        });
+      valueListenable: SettingsBox.listenable,
+      builder: (context, box, _) {
+        return MaterialApp(
+          theme: buildLessphoneTheme(SettingsBox.currentTheme),
+          home: HomeScreen(),
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaleFactor: SettingsBox.currentFontFactor),
+              child: ScrollConfiguration(
+                child: child,
+                behavior: NoScrollGlow(),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }
