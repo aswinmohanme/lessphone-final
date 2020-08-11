@@ -23,6 +23,7 @@ class TaskScreen extends StatelessWidget {
               SizedBox(height: s_12),
               TextField(
                 controller: _textFieldController,
+                textCapitalization: TextCapitalization.sentences,
                 onSubmitted: (String name) {
                   Task.createTask(name);
                   _textFieldController.clear();
