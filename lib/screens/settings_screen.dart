@@ -186,7 +186,6 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
     }
     _subscription = _iap.purchaseUpdatedStream.listen(
       (data) => setState(() {
-        print('NEW PURCHASE');
         _purchases.addAll(data);
       }),
     );
@@ -232,7 +231,9 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
       thumbColor: Theme.of(context).colorScheme.background,
       groupValue: groupValue,
       onValueChanged: (value) {
-        if (_hasPurchased(_products.first.id) != null) {
+        if (SettingsBox.doesOwnPremium ||
+            (_hasPurchased(_products.first.id) != null)) {
+          SettingsBox.doesOwnPremium = true;
           setState(() {
             groupValue = value;
           });

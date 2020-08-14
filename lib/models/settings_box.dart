@@ -27,6 +27,14 @@ class SettingsBox {
     _objectBox.put('currentFontFactor', factor);
   }
 
+  static get doesOwnPremium {
+    return _objectBox.get('doesOwnPremium', defaultValue: false);
+  }
+
+  static set doesOwnPremium(bool value) {
+    _objectBox.put('doesOwnPremium', value);
+  }
+
   static LESSPHONE_THEMES segmentValueToTheme(value) {
     switch (value) {
       case 0:
