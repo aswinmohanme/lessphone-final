@@ -204,7 +204,7 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
     QueryPurchaseDetailsResponse response = await _iap.queryPastPurchases();
 
     for (PurchaseDetails purchase in response.pastPurchases) {
-      if (Platform.isIOS) {
+      if (!purchase.billingClientPurchase.isAcknowledged) {
         InAppPurchaseConnection.instance.completePurchase(purchase);
       }
     }
