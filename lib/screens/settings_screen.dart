@@ -184,11 +184,16 @@ class _SegmentedChoiceState extends State<SegmentedChoice> {
       await _getProducts();
       await _getPastPurchases();
     }
-    _subscription = _iap.purchaseUpdatedStream.listen(
-      (data) => setState(() {
+    _subscription = _iap.purchaseUpdatedStream.listen((data) {
+      for (PurchaseDetails purchase in data) {
+        if (!purchase.billingClientPurchase.isAcknowledged) {
+          InAppPurchaseConnection.instance.completePurchase(purchase);
+        }
+      }
+      setState(() {
         _purchases.addAll(data);
-      }),
-    );
+      });
+    });
   }
 
   Future<void> _getProducts() async {
