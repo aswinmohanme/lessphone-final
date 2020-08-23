@@ -4,6 +4,7 @@ import '../widgets/text.dart';
 import '../widgets/footer.dart';
 import '../styles.dart';
 import '../models/task.dart';
+import '../transalation.dart';
 
 class TaskScreen extends StatelessWidget {
   static var _textFieldController = TextEditingController();
@@ -29,7 +30,7 @@ class TaskScreen extends StatelessWidget {
                   _textFieldController.clear();
                 },
                 decoration: InputDecoration(
-                  labelText: 'Enter the Todo',
+                  labelText: 'Enter the Todo'.i18n,
                   labelStyle: Theme.of(context).textTheme.bodyText1,
                   border: OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(
@@ -64,7 +65,7 @@ class TaskScreen extends StatelessWidget {
                                     Theme.of(context).colorScheme.primary,
                                 dense: true,
                                 value: task.isCompleted,
-                                title: Text(task.name,
+                                title: Text(task.name.i18n,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1

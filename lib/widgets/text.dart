@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../transalation.dart';
 
 class BigBodyText extends StatelessWidget {
   final String text;
@@ -8,7 +9,7 @@ class BigBodyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text.i18n,
       style: Theme.of(context).textTheme.bodyText1.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -24,7 +25,7 @@ class BodyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text.i18n,
       style: Theme.of(context).textTheme.bodyText2.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -40,7 +41,7 @@ class HeadingText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text.i18n,
       style: Theme.of(context).textTheme.headline6.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -56,7 +57,7 @@ class CaptionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text.i18n,
       style: Theme.of(context).textTheme.caption.copyWith(
             color: Theme.of(context).colorScheme.primaryVariant,
           ),
@@ -72,7 +73,7 @@ class ButtonText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text.i18n,
       style: Theme.of(context).textTheme.caption.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:flutter/services.dart';
+import "package:i18n_extension/i18n_widget.dart";
 
 import './screens/home_screen.dart';
 import 'themes.dart';
@@ -24,7 +25,10 @@ class Lessphone extends StatelessWidget {
       builder: (context, box, _) {
         return MaterialApp(
           theme: buildLessphoneTheme(SettingsBox.currentTheme),
-          home: HomeScreen(),
+          home: I18n(
+            initialLocale: Locale("de"),
+            child: HomeScreen(),
+          ),
           builder: (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context)

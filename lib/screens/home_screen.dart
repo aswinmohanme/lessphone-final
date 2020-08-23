@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lessphone/widgets/text.dart';
 
 import '../styles.dart';
 import '../utils/platform_intents.dart';
@@ -64,8 +65,7 @@ class HomeScreen extends StatelessWidget {
                                   PlatformIntents.launchApp(
                                       customApp.packageName);
                               },
-                              child: Text(customApp.name,
-                                  style: Theme.of(context).textTheme.headline6),
+                              child: HeadingText(customApp.name),
                             ),
                           );
                         },
