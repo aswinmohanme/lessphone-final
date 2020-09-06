@@ -12,7 +12,12 @@ void main() async {
   await HiveRepo.initHive();
   InAppPurchaseConnection.enablePendingPurchases();
 
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
   runApp(Lessphone());
 }
 
